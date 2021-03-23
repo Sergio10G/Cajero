@@ -1,7 +1,7 @@
 <div class="menu_principal">
-    <form action="" method="post">
-        <input type="submit" value="Ingresar">
-        <input type="submit" value="Retirar">
-        <input type="submit" value="Saldo">
+    <form action="./controllers/controllerMenu.php" method="post">
+        <input type="submit" value="Ingresar" name="btnMenu">
+        <input type="submit" value="Retirar" name="btnMenu">
+        <input type="submit" value="Saldo" name="btnMenu">
     </form>
 </div>
