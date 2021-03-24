@@ -2,13 +2,15 @@
 
 class Usuario{
     //    ATRIBUTOS
-    private $cod, $nombre, $apellidos, $clave;
+    private $id, $nombre, $apellidos, $clave;
 
     //    CONSTRUCTOR Y DESTRUCTOR
     public function __construct($datos){
-        $this -> cod        = $datos['COD'];
-        $this -> nombre     = $datos['NOMBRE'];
-        $this -> apellidos  = $datos['APELLIDOS'];
+        if($datos !== null){
+            $this -> id         = $datos['ID'];
+            $this -> nombre     = $datos['NOMBRE'];
+            $this -> apellidos  = $datos['APELLIDOS'];
+        }
         //$this -> cod = $datos['COD'];
     }
 

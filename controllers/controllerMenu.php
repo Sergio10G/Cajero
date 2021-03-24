@@ -18,5 +18,8 @@ if(isset($_POST['btnMenu'])){
             # code...
             break;
     }
-    header("refresh: 0.1; url=../index.php?$url_redireccion");
+    header("refresh: 0.01; url=../index.php?$url_redireccion");
+}
+else{
+    header("refresh: 0.01; url=../index.php");
 }

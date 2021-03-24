@@ -1,4 +1,5 @@
 <?php
+    require_once "./resources/sesion.php";
     require_once "./resources/helpers.php";
     
     require_once "./views/header.php";
