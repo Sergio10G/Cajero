@@ -12,7 +12,7 @@ class Cajero{
 
     public function __destruct(){
         try {
-            $this -> db -> mysqli_close();
+            $this -> db -> close();
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -20,22 +20,6 @@ class Cajero{
     }
 
     //    METODOS
-    public function iniciarSesion($clave){
-        $usuarios = [];
-        $sql = "SELECT * FROM USUARIOS WHERE CLAVE='$clave'";
-        $result = $this -> db -> query($sql);
-        while($usuario = mysqli_fetch_assoc($result)){
-            array_push($usuarios, $usuario);
-        }
-
-        if(count($usuarios) == 1){
-            $this -> usuario = new Usuario($usuarios[0]);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     public function ingresar($importe){
         if($this -> usuario !== null){
