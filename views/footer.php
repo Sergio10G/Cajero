@@ -4,9 +4,9 @@
                 <input type="submit" value="Volver al menú principal">
             </form>
             <?php endif;?>
-            <?php if(isset($_SESSION['cajero']) && $_SESSION['cajero'] -> getUsuario() !== null):?>
-            <form action="">
-                <input type="submit" value="Cerrar sesión">
+            <?php if($_SESSION['usuario'] !== null):?>
+            <form method="POST" action="./controllers/controllerLogin.php">
+                <input type="submit" name="cerrar" value="Cerrar sesión">
             </form>
             <?php endif;?>
         </footer>

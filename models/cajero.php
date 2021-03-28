@@ -1,8 +1,9 @@
 <?php
 require_once "./resources/db.php";
+
 class Cajero{
     //    ATRIBUTOS
-    private $db, $usuario;
+    private $db;
 
     //    CONSTRUCTOR Y DESTRUCTOR
     public function __construct(){
@@ -32,15 +33,4 @@ class Cajero{
             $this -> db -> query($sql);
         }
     }
-
-    //    GETTERS
-    public function getUsuario(){
-        return $this -> usuario;
-    }
-
-    //    SETTERS
-    public function setUsuario($usuario){
-        $this -> usuario = $usuario;
-    }
-
 }
