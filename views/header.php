@@ -12,4 +12,16 @@
     <div class="contenedor">
         <header>
             <h1>El cajero confiable</h1>
+            <div class="usuario">
+                <?php if($_SESSION['usuario'] !== null):?>
+
+                <?php else:?>
+                    <form action="./controllers/controllerMenu.php" method="post">
+                        <label>¿Ya tienes cuenta?</label>
+                        <input type="submit" name="btnMenu" value="Iniciar sesión">
+                        <label>¿No tienes cuenta todavía?</label>
+                        <input type="submit" name="btnMenu" value="Registrarse">
+                    </form>
+                <?php endif;?>
+            </div>
         </header>

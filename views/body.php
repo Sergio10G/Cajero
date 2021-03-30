@@ -19,7 +19,12 @@
                     }
                 }
                 else{
-                    require_once "./views/viewLogin.php";
+                    if($_GET['pag'] == 5){
+                        require_once "./views/viewRegistro.php";
+                    }
+                    else{
+                        require_once "./views/viewLogin.php";
+                    }
                 }
             }
         ?>

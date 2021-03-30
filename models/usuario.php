@@ -58,15 +58,15 @@ class Usuario{
 
     public function calcularSaldo(){
         if($this -> cod_cuenta !== null && $this -> clave !== null){
-            $sql = "SELECT calcular_saldo(".$this -> id.")";
-            
             /*
             POR ALGUNA RAZÓN EL SERVIDOR INTERPRETA QUE EL OBJETO SQL ESTÁ CERRADO AL LLEGAR A ESTA FUNCIÓN,
             PERO AL DECLARARLO OTRA VEZ TODO FUNCIONA BIEN.
             */
             
             $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
-
+            
+            $sql = "SELECT calcular_saldo(".$this -> id.")";
+            
             if(!$resultado = $this -> db -> query($sql)){
                 return false;
             }
@@ -107,11 +107,27 @@ class Usuario{
         return false;
     }
 
-    public function save(){
-
+    public function registro(){
+        if($this -> cod_cuenta  !== null 
+        && $this -> nombre      !== null
+        && $this -> apellidos   !== null
+        && $this -> clave       !== null){
+            $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
+            
+            $sql = "INSERT INTO USUARIOS(NOMBRE, APELLIDOS, CLAVE, COD_CUENTA) VALUES (
+                '".$this -> nombre."',
+                '".$this -> apellidos."',
+                '".$this -> clave."',
+                '".$this -> cod_cuenta."'
+            )";
+            if($this -> db -> query($sql)){ 
+                return true;
+            }
+        }
+        return false;
     }
 
-    public function delete(){
+    public function borrar(){
 
     }
 

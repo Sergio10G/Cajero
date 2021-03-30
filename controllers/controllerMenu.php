@@ -3,8 +3,9 @@ if(!isset($_SESSION)){
     session_start();
 }
 
+$url_redireccion = "pag=0";
+
 if(isset($_POST['btnMenu'])){
-    $url_redireccion = "pag=0";
     switch ($_POST['btnMenu']) {
         case 'Ingresar':
             $url_redireccion = "pag=1";
@@ -17,13 +18,12 @@ if(isset($_POST['btnMenu'])){
         case 'Saldo':
             $url_redireccion = "pag=3";
             break;
-                
-        default:
-            # code...
+        case 'Iniciar sesión':
+            $url_redireccion = "pag=4";
             break;
-    }
-    header("location: ../index.php?$url_redireccion");
+        case 'Registrarse':
+            $url_redireccion = "pag=5";
+            break;
+    }   
 }
-else{
-    header("location: ../index.php");
-}
+header("location: ../index.php?$url_redireccion");
