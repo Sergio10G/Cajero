@@ -1,5 +1,4 @@
 <?php
-require_once "./models/cajero.php";
 
 if(!isset($_SESSION)){
     session_start();

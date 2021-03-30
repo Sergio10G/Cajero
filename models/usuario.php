@@ -1,22 +1,22 @@
 <?php
-require_once "../resources/db.php";
 class Usuario{
     //    ATRIBUTOS
-    public $db, $id, $nombre, $apellidos, $clave, $cod_cuenta;
+    public $db, $id, $nombre, $apellidos, $clave, $cod_cuenta, $saldo;
 
     //    CONSTRUCTOR Y DESTRUCTOR
     public function __construct($datos){
-        $this -> db = (new Database()) -> connect();
+        $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
         $this -> genCodCuenta();
         if($datos !== null){
             $this -> cod_cuenta = $datos['COD_CUENTA'];
             $this -> clave  = $datos['CLAVE'];
         }
+        $this -> saldo = null;
     }
 
     public function __destruct(){
         try {
-            $this -> db -> close();
+            //$this -> db -> close();
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -29,8 +29,8 @@ class Usuario{
         $cods = [];
         
         $sql = "SELECT COD_CUENTA FROM USUARIOS";
-        $resultados = $this -> db -> query($sql);
-        while($codigo_recogido = mysqli_fetch_assoc($resultados)){
+        $resultado = $this -> db -> query($sql);
+        while($codigo_recogido = mysqli_fetch_assoc($resultado)){
             array_push($cods, $codigo_recogido['COD_CUENTA']);
         }
 
@@ -55,13 +55,34 @@ class Usuario{
         $this -> cod_cuenta = $cod;
     }
 
+    public function calcularSaldo(){
+        if($this -> cod_cuenta !== null && $this -> clave !== null){
+            $sql = "SELECT calcular_saldo(".$this -> id.")";
+            
+            /*
+            POR ALGUNA RAZÓN EL SERVIDOR INTERPRETA QUE EL OBJETO SQL ESTÁ CERRADO AL LLEGAR A ESTA FUNCIÓN,
+            PERO AL DECLARARLO OTRA VEZ TODO FUNCIONA BIEN.
+            */
+            
+            $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
+            $resultado = $this -> db -> query($sql);
+
+            if(mysqli_num_rows($resultado) == 1){
+                $saldo = mysqli_fetch_row($resultado)[0];
+                $this -> saldo = $saldo;
+            }
+            
+        }
+    }
+
     public function login(){
         if($this -> cod_cuenta !== null && $this -> clave !== null){
             $sql = "SELECT * FROM USUARIOS WHERE COD_CUENTA = '".$this -> cod_cuenta."'";
             $resultado = $this -> db -> query($sql);
-            $usu_devuelto = mysqli_fetch_assoc($resultado);
             
-            if($usu_devuelto != false){
+            if(mysqli_num_rows($resultado) == 1){
+                $usu_devuelto = mysqli_fetch_assoc($resultado);
+
                 if($this -> clave == $usu_devuelto['CLAVE']){
                     //echo var_dump($usu_devuelto);
                     $this -> id =           $usu_devuelto['ID'];
@@ -88,12 +109,5 @@ class Usuario{
     public function delete(){
 
     }
-    
-
-    //    GETTERS
-    
-
-    //    SETTERS
-    
 
 }

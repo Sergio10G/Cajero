@@ -1,19 +1,17 @@
 <?php
-require_once "./resources/db.php";
-
 class Cajero{
     //    ATRIBUTOS
     private $db;
 
     //    CONSTRUCTOR Y DESTRUCTOR
     public function __construct(){
-        $this -> db = (new Database()) -> connect();
+        $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
         $this -> usuario = null;
     }
 
     public function __destruct(){
         try {
-            $this -> db -> close();
+            //$this -> db -> close();
         } catch (\Throwable $th) {
             //throw $th;
         }

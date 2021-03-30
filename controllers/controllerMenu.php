@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
+
 if(isset($_POST['btnMenu'])){
     $url_redireccion = "pag=0";
     switch ($_POST['btnMenu']) {
