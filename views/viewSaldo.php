@@ -3,6 +3,6 @@
     
     </div>
     <div class="saldo">
-        <?php require_once "./controllers/ControllerSaldo.php";?>
+        <?php require_once "./controllers/ControllerSaldo.php";?>€
     </div>
 </div>

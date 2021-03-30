@@ -16,10 +16,15 @@ if(isset($_POST)){
     */
     if($_SESSION['usuario'] !== null && $_SESSION['cajero'] !== null){
         if($clave == $_SESSION['usuario'] -> clave){
-            $_SESSION['cajero'] -> ingresar($_SESSION['usuario'] -> id, $importe);
-            //  Actualizar el saldo del usuario
-            $_SESSION['usuario'] -> calcularSaldo();
+            if($importe <= $_SESSION['usuario'] -> saldo){
+                $_SESSION['cajero'] -> retirar($_SESSION['usuario'] -> id, $importe);
+                //  Actualizar el saldo del usuario
+                $_SESSION['usuario'] -> calcularSaldo();
+            }
+            else{
+                //  Mensaje de error
+            }
         }
     }
 }
-header("location: ../index.php?pag=1");
+header("location: ../index.php?pag=2");
