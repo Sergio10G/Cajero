@@ -5,24 +5,27 @@ if(!isset($_SESSION)){
     session_start();
 }
 
+$msg = "";
+
 if(isset($_POST)){
     if(isset($_POST['cod_cuenta']) && isset($_POST['clave'])){
         $cod_cuenta = $_POST['cod_cuenta'];
         $clave = $_POST['clave'];
 
         $usuario = new Usuario(["COD_CUENTA" => $cod_cuenta, "CLAVE" => $clave]);
-        if($usuario -> login() !== false){
+        if($usuario -> login()){
             $_SESSION['usuario'] = $usuario;
-            //echo "Usuario ".$usuario -> nombre." logeado con éxito.";
-            header("Refresh: 0.01; url=../index.php?pag=".$_POST['pag']);
+            $msg = "green-Login realizado con éxito. Bienvenido, ".$_SESSION['usuario'] -> nombre.".";
         }
         else{
-            echo "Login fallido.";
+            $msg = "red-Login fallido.";
         }
     }
-    else if(isset($_POST['cerrar'])){
-        $_SESSION['sesion_iniciada'] = false;
-        header("Refresh: 0.01; url=../index.php");
+    else{
+        $msg = "red-Error. Debes introducir un código de cuenta y una contraseña.";
     }
-    
 }
+else{
+    $msg = "red-Se ha producido un error al enviar el formulario.";
+}
+header("location: ../index.php?pag=".$_POST['pag']."&msg=$msg");

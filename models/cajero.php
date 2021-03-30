@@ -9,11 +9,7 @@ class Cajero{
     }
 
     public function __destruct(){
-        try {
-            //$this -> db -> close();
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        //$this -> db -> close();
         
     }
 
@@ -26,9 +22,10 @@ class Cajero{
         $importe, 
         '".date('Y-m-d')."', 
         'ENTRADA')";
-        echo "Se va a intentar ingresar...<br>";
-        $this -> db -> query($sql) or die("Ha habido un error al ingresar el dinero.");
-        
+        if(!$this -> db -> query($sql)){
+            return false;
+        }
+        return true;
     }
 
     public function retirar($id, $importe){
@@ -38,7 +35,10 @@ class Cajero{
         $importe, 
         '".date('Y-m-d')."', 
         'SALIDA')";
-        echo "Se va a intentar retirar...<br>";
-        $this -> db -> query($sql) or die("Ha habido un error al retirar el dinero.");
+        ;
+        if(!$this -> db -> query($sql)){
+            return false;
+        }
+        return true;
     }
 }

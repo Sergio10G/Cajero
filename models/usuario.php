@@ -15,11 +15,12 @@ class Usuario{
     }
 
     public function __destruct(){
-        try {
-            //$this -> db -> close();
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        //$this -> db -> close();
+
+        /*  
+            POR ALGUNA RAZÓN, LA CONEXIÓN CON LA BDD SE CIERRA AUTOMÁTICAMENTE,
+            LO QUE ME OBLIGA A REABRIRLA EN LOS MÉTODOS QUE LA UTILIZAN, A EXCEPCIÓN DEL LOGIN, AHÍ SIGUE ABIERTA 
+        */
     }
 
     //    METODOS
@@ -65,20 +66,28 @@ class Usuario{
             */
             
             $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
-            $resultado = $this -> db -> query($sql);
+
+            if(!$resultado = $this -> db -> query($sql)){
+                return false;
+            }
 
             if(mysqli_num_rows($resultado) == 1){
                 $saldo = mysqli_fetch_row($resultado)[0];
                 $this -> saldo = $saldo;
+                return true;
             }
             
         }
+        return false;
     }
 
     public function login(){
         if($this -> cod_cuenta !== null && $this -> clave !== null){
             $sql = "SELECT * FROM USUARIOS WHERE COD_CUENTA = '".$this -> cod_cuenta."'";
-            $resultado = $this -> db -> query($sql);
+
+            if(!$resultado = $this -> db -> query($sql)){
+                return false;
+            }
             
             if(mysqli_num_rows($resultado) == 1){
                 $usu_devuelto = mysqli_fetch_assoc($resultado);
@@ -93,13 +102,9 @@ class Usuario{
 
                     return true;
                 }
-                return false;
             }
-            else{
-                return false;
-            }
-
         }
+        return false;
     }
 
     public function save(){

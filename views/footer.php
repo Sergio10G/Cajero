@@ -5,7 +5,7 @@
             </form>
             <?php endif;?>
             <?php if($_SESSION['usuario'] !== null):?>
-            <form method="POST" action="./controllers/controllerLogin.php">
+            <form method="POST" action="./controllers/controllerLogout.php">
                 <input type="submit" name="cerrar" value="Cerrar sesión">
             </form>
             <?php endif;?>
