@@ -18,7 +18,7 @@ if(isset($_POST['btnMenu'])){
         case 'Saldo':
             $url_redireccion = "pag=3";
             break;
-        case 'Iniciar sesión':
+        case 'Iniciar':
             $url_redireccion = "pag=4";
             break;
         case 'Registrarse':

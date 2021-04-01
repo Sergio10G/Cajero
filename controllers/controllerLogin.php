@@ -16,10 +16,10 @@ if(isset($_POST)){
         $usuario = new Usuario(["COD_CUENTA" => $cod_cuenta, "CLAVE" => $clave]);
         if($usuario -> login()){
             $_SESSION['usuario'] = $usuario;
-            $msg = "green-Login realizado con éxito. Bienvenido, ".$_SESSION['usuario'] -> nombre.".";
+            $msg = "green-Bienvenid@, ".$_SESSION['usuario'] -> nombre.".";
         }
         else{
-            $msg = "red-Login fallido.";
+            $msg = "red-La contraseña o el código de cuenta son incorrectos.";
         }
     }
     else{

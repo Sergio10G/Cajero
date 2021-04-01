@@ -1,26 +1,12 @@
 <div class="menu_principal">
     <div class="info">
-    
+        Bienvenid@ al cajero confiable.
     </div>
-
-    <?php 
-        if(isset($_GET['msg'])){
-            $raw = explode("-", $_GET['msg']);
-            $datos_msg = [
-                "color"     =>  $raw[0],
-                "mensaje"   =>  $raw[1]
-            ];
-            echo '
-                <div class="msg" style="color: '.$datos_msg["color"].';">
-                    '.$datos_msg["mensaje"].'
-                </div>
-            ';
-        }
-    ?>
-
-    <form action="./controllers/controllerMenu.php" method="post">
-        <input type="submit" value="Ingresar" name="btnMenu">
-        <input type="submit" value="Retirar" name="btnMenu">
-        <input type="submit" value="Saldo" name="btnMenu">
-    </form>
+    <div class="formulario_menu">
+        <form action="./controllers/controllerMenu.php" method="post">
+            <button type="submit" name="btnMenu" class="btn btnMenu" value="Ingresar">Ingresar</button>
+            <button type="submit" name="btnMenu" class="btn btnMenu" value="Retirar">Retirar</button>
+            <button type="submit" name="btnMenu" class="btn btnMenu" value="Saldo">Saldo</button>
+        </form>
+    </div>
 </div>

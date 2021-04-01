@@ -12,16 +12,38 @@
     <div class="contenedor">
         <header>
             <h1>El cajero confiable</h1>
-            <div class="usuario">
-                <?php if($_SESSION['usuario'] !== null):?>
-
+            <?php if($_SESSION['usuario'] !== null):?>
+                <div class="cuenta">
+                    <div class="usuario">
+                        <span class="nombre"><?=$_SESSION['usuario'] -> nombre?></span>
+                        <span class="apellidos"><?=$_SESSION['usuario'] -> apellidos?></span>
+                        <span class="cod_cuenta"><?=$_SESSION['usuario'] -> cod_cuenta?></span>
+                    </div>
+                </div>
                 <?php else:?>
+                    <?php if(!isset($_GET['pag']) || (isset($_GET['pag']) && $_GET['pag'] == 0)):?>
+                    <div class="cuenta">
                     <form action="./controllers/controllerMenu.php" method="post">
                         <label>¿Ya tienes cuenta?</label>
-                        <input type="submit" name="btnMenu" value="Iniciar sesión">
+                        <button type="submit" name="btnMenu" class="btn" value="Iniciar">Iniciar sesión</button>
                         <label>¿No tienes cuenta todavía?</label>
-                        <input type="submit" name="btnMenu" value="Registrarse">
+                        <button type="submit" name="btnMenu" class="btn" value="Registrarse">Registrarse</button>
                     </form>
+                    </div>
+                    <?php endif;?>
                 <?php endif;?>
-            </div>
         </header>
+        <?php 
+            if(isset($_GET['msg'])){
+                $raw = explode("-", $_GET['msg']);
+                $datos_msg = [
+                    "color"     =>  $raw[0],
+                    "mensaje"   =>  $raw[1]
+                ];
+                echo '
+                    <div class="msg" style="color: '.$datos_msg["color"].';">
+                        '.$datos_msg["mensaje"].'
+                    </div>
+                ';
+            }
+        ?>
