@@ -18,6 +18,6 @@
         <label for="clave">Clave</label>
         <input type="password" name="clave" id="" required>
 
-        <input type="submit" value="Registrarse">
+        <button type="submit" class="btn" value="Registrarse">Registrarse</button>
     </form>
 </div>

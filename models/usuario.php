@@ -114,7 +114,7 @@ class Usuario{
         && $this -> nombre      !== null
         && $this -> apellidos   !== null
         && $this -> clave       !== null){
-            $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
+            //$this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
             
             $sql = "INSERT INTO USUARIOS(NOMBRE, APELLIDOS, CLAVE, COD_CUENTA) VALUES (
                 '".$this -> nombre."',

@@ -11,7 +11,7 @@
             <?php 
                 echo '<input type="hidden" name="pag" value="'.$_GET['pag'].'">';
             ?>
-            <input type="submit" value="Enviar">
+            <button type="submit" class="btn" value="Enviar">Iniciar sesión</button>
         </form>
     </div>
 </div>
