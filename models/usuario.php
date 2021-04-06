@@ -19,7 +19,7 @@ class Usuario{
 
         /*  
             POR ALGUNA RAZÓN, LA CONEXIÓN CON LA BDD SE CIERRA AUTOMÁTICAMENTE,
-            LO QUE ME OBLIGA A REABRIRLA EN LOS MÉTODOS QUE LA UTILIZAN, A EXCEPCIÓN DEL LOGIN, AHÍ SIGUE ABIERTA 
+            LO QUE ME OBLIGA A REABRIRLA EN LOS MÉTODOS QUE LA UTILIZAN, A EXCEPCIÓN DEL LOGIN, AHÍ SIGUE ABIERTA
         */
     }
 
@@ -31,10 +31,12 @@ class Usuario{
         
         $sql = "SELECT COD_CUENTA FROM USUARIOS";
         $resultado = $this -> db -> query($sql);
-        while($codigo_recogido = mysqli_fetch_assoc($resultado)){
-            array_push($cods, $codigo_recogido['COD_CUENTA']);
+        if($resultado !== false){
+            while($codigo_recogido = mysqli_fetch_assoc($resultado)){
+                array_push($cods, $codigo_recogido['COD_CUENTA']);
+            }
         }
-
+        
         do{
             $acabado = true;
             $cod = "";

@@ -18,6 +18,9 @@
                         <span class="nombre"><?=$_SESSION['usuario'] -> nombre?></span>
                         <span class="apellidos"><?=$_SESSION['usuario'] -> apellidos?></span>
                         <span class="cod_cuenta"><?=$_SESSION['usuario'] -> cod_cuenta?></span>
+                        <form method="POST" action="./controllers/controllerLogout.php">
+                            <button type="submit" name="cerrar" class="btn" value="cerrar">Cerrar sesión</button>
+                        </form>
                     </div>
                 </div>
                 <?php else:?>
