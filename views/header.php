@@ -14,9 +14,11 @@
             <h1>El cajero confiable</h1>
             <?php if($_SESSION['usuario'] !== null):?>
                 <div class="cuenta">
+                    <div class="foto">
+                        <img src="./img/foto.png" alt="Foto de usuario">
+                    </div>
                     <div class="usuario">
-                        <span class="nombre"><?=$_SESSION['usuario'] -> nombre?></span>
-                        <span class="apellidos"><?=$_SESSION['usuario'] -> apellidos?></span>
+                        <span class="nombre"><?=$_SESSION['usuario'] -> nombre?> <?=$_SESSION['usuario'] -> apellidos?></span>
                         <span class="cod_cuenta"><?=$_SESSION['usuario'] -> cod_cuenta?></span>
                         <form method="POST" action="./controllers/controllerLogout.php">
                             <button type="submit" name="cerrar" class="btn" value="cerrar">Cerrar sesión</button>

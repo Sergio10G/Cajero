@@ -83,6 +83,25 @@ class Usuario{
         return false;
     }
 
+    public function ultimosMovimientos(){
+        if($this -> cod_cuenta !== null && $this -> clave !== null){
+            $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
+            
+            $movs = [];
+            $sql = "SELECT * FROM OPERACIONES WHERE ID_USUARIO = {$this -> id} ORDER BY FECHA DESC LIMIT 5";
+
+            if(!$resultado = $this -> db -> query($sql)){
+                return false;
+            }
+
+            while ($movimiento = mysqli_fetch_assoc($resultado)) {
+                array_push($movs, $movimiento);
+            }
+            return $movs;
+        }
+        return false;
+    }
+
     public function login(){
         if($this -> cod_cuenta !== null && $this -> clave !== null){
             $sql = "SELECT * FROM USUARIOS WHERE COD_CUENTA = '".$this -> cod_cuenta."'";
