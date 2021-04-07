@@ -86,9 +86,9 @@ class Usuario{
     public function ultimosMovimientos(){
         if($this -> cod_cuenta !== null && $this -> clave !== null){
             $this -> db = mysqli_connect("localhost", "root", "", "CAJERO");
-            
+
             $movs = [];
-            $sql = "SELECT * FROM OPERACIONES WHERE ID_USUARIO = {$this -> id} ORDER BY FECHA DESC LIMIT 5";
+            $sql = "SELECT * FROM OPERACIONES WHERE ID_USUARIO = {$this -> id} ORDER BY ID_OPERACION DESC LIMIT 5";
 
             if(!$resultado = $this -> db -> query($sql)){
                 return false;
